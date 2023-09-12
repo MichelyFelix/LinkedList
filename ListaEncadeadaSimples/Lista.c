@@ -5,29 +5,29 @@ Listas encadeadas são estruturas de dados que permitem armazenar uma coleção
 Neste arquivo, temos a implementação de uma lista encadeada simples de inteiros.
 */
 
-#include "lista.h"
+#include "lista.h"//Cabeçalho da TAD que contém as funções
 
-struct lista
+struct lista//struct que define os elementos da lista
 {
-	int info;
-	struct lista *prox;
+	int info;//armazena os elementos da lista
+	struct lista *prox;//ponteiro para apontar para o proximo elemento da lista
 };
 
-Lista *lst_cria(void)
+Lista *lst_cria(void)//cria a lista
 {
 	return NULL;
 }
 
 Lista *lst_insere(Lista *l, int v)
 {
-	Lista *novo = (Lista *)malloc(sizeof(Lista));
-	if (novo == NULL)
+	Lista *novo = (Lista *)malloc(sizeof(Lista));//aloca dinamicamente o vetor
+	if (novo == NULL)//verifica se é possivel realizar a alocção e se não for possivel aborta a execução
 	{
 		printf("[ERRO] memoria insuficiente!");
 		exit(1);
 	}
-	novo->info = v;
-	novo->prox = l;
+	novo->info = v;//Insere um novo elemento no inicio da lista usando a varoável v
+	novo->prox = l;//aponta para o inicio da lista
 	return novo;
 
 	/* Ou para alterar diretamente
@@ -39,30 +39,30 @@ Lista *lst_insere(Lista *l, int v)
 	*t = novo; */
 }
 
-int lst_vazia(Lista *l)
+int lst_vazia(Lista *l)//função que verifica se a lista está vazia caso l retorne NULL
 {
 	return (l == NULL);
 }
 
-void lst_imprime(Lista *l)
+void lst_imprime(Lista *l)//função para imprimir os elementos da lista
 {
 	Lista *p;
-	for (p = l; p != NULL; p = p->prox)
+	for (p = l; p != NULL; p = p->prox)//o for vai até o valor que NULL aponta que seria o primeiro valor que foi inseerido na lista
 	{
 		printf("\tInfo = %d \n", p->info);
 	}
 }
 
-Lista *lst_busca(int elemento, Lista *l)
+Lista *lst_busca(int elemento, Lista *l)//função para buuscar um elemento da lista
 {
 	Lista *p;
-	for (p = l; p != NULL; p = p->prox)
+	for (p = l; p != NULL; p = p->prox)//o for vai até o valor que NULL aponta que seria o primeiro valor que foi inseerido na lista
 	{
-		if (p->info == elemento)
+		if (p->info == elemento)//condição para verificar que o item buscado é igual 
 			return p;
 	}
 
-	return NULL;
+	return NULL;//A função retorna NULL se o elemento não for encontrado
 }
 
 Lista *lst_retira(Lista *l, int v)
@@ -73,7 +73,7 @@ Lista *lst_retira(Lista *l, int v)
 	while (p->info != v)
 	{
 		if (p == NULL)
-			return l; /* n�o achou: retorna lista original */
+			return l; /* nao achou: retorna lista original */
 		ant = p;
 		p = p->prox;
 		/* verifica se achou elemento */
@@ -89,9 +89,9 @@ Lista *lst_retira(Lista *l, int v)
 	return l;
 }
 
-void lst_libera(Lista *l)
+void lst_libera(Lista *l)//função usada para liberar a memoria que foi alocada
 {
-	Lista *p = l;
+	Lista *p = l;//ponteiro que aponta para o inicio da lista
 	Lista *t;
 	while (p != NULL)
 	{
@@ -103,10 +103,10 @@ void lst_libera(Lista *l)
 
 Lista *lst_insere_ordenada(Lista *l, int v)
 {
-	Lista *novo;
-	Lista *ant = NULL;
-	Lista *p = l;
-	while (p != NULL && p->info < v)
+	Lista *novo;//novo nó a ser adicionado
+	Lista *ant = NULL;//ponteiro que aponta para o endereço do elemento anterior
+	Lista *p = l;//ponteiro usado para percorer a lista
+	while (p != NULL && p->info < v)//enquanto p 
 	{
 		ant = p;
 		p = p->prox;
@@ -131,16 +131,16 @@ Lista *lst_ler_arquivo(char *nome_arquivo)
 	FILE *arquivo;
 	int valor;
 	Lista *l = lst_cria();
-	arquivo = fopen(nome_arquivo, "r");
-	if (arquivo == NULL)
+	arquivo = fopen(nome_arquivo, "r");//abre um arquivo no modo de leitura
+	if (arquivo == NULL)//
 	{
 		printf("Erro ao abrir o arquivo!\n");
 		exit(1);
 	}
-	while (fscanf(arquivo, "%d", &valor) != EOF)
+	while (fscanf(arquivo, "%d", &valor) != EOF)//laço de repetição que lê os elementos da lista 
 	{
 		l = lst_insere(l, valor);
 	}
-	fclose(arquivo);
+	fclose(arquivo);//função que feicha o arquivo
 	return l;
 }
