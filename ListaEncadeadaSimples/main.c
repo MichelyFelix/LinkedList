@@ -4,10 +4,10 @@ int main() {
     Lista *lista = lst_cria();  // Cria uma lista encadeada vazia
 
     // Insere elementos na lista
-    lista = lst_insere(lista, 42);
-    lista = lst_insere(lista, 17);
-    lista = lst_insere(lista, 65);
-    lista = lst_insere(lista, 23);
+    lista = lst_insere(lista, "mar");
+    lista = lst_insere(lista, "oceano");
+    lista = lst_insere(lista, "estrela");
+    lista = lst_insere(lista, "peixe");
 
     printf("Lista apos insercao de elementos:\n");
     lst_imprime(lista);
@@ -22,24 +22,24 @@ int main() {
 	printf("\n");
 
     // Busca um elemento na lista
-    Lista *resultadoBusca = lst_busca(65, lista);
+    Lista *resultadoBusca = lst_busca("mar", lista);
     if (resultadoBusca != NULL) {
-        printf("Elemento %d encontrado na lista.\n", resultadoBusca->info);
+        printf("Elemento %s encontrado na lista.\n", resultadoBusca->info);
     } else {
         printf("Elemento não encontrado na lista.\n");
     }
 	printf("\n");
 
     // Remove um elemento da lista
-    lista = lst_retira(lista, 17);
-    printf("Lista apos a remocao do elemento %d:\n", 17);
+    lista = lst_retira(lista, "estrela");
+    printf("Lista apos a remocao do elemento %s:\n", "estrela");
     lst_imprime(lista);
 	printf("\n");
 
     // Insere um elemento de forma ordenada na lista
-    int elementoOrdenado = 10;
+    int elementoOrdenado = "estrela";
     lista = lst_insere_ordenada(lista, elementoOrdenado);
-    printf("Lista apos a insercao ordenada do elemento %d:\n", elementoOrdenado);
+    printf("Lista apos a insercao ordenada do elemento %s:\n", elementoOrdenado);
     lst_imprime(lista);
 	printf("\n");
 
