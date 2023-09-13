@@ -142,6 +142,6 @@ Lista *lst_ler_arquivo(char *nome_arquivo)
 	{
 		l = lst_insere(l, valor);//Insere os elementos lidos no arquivo usando a função lst_insere
 	}
-	fclose(arquivo);//função que feicha o arquivo
+	fclose(arquivo);//função que fecha o arquivo
 	return l;//retorna um ponteiro para lista criada
 }
